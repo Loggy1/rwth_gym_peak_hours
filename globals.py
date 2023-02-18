@@ -1,0 +1,1 @@
+path = "/home/user/Coding/rwth_hochschulsport_scraper"
