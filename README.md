@@ -8,4 +8,5 @@
 
 # Add Pakages:
   1. sudo apt-get install python3-tk
+  2. pip install matplotlib
   
