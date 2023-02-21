@@ -5,6 +5,8 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import matplotlib
 matplotlib.use("TkAgg")
 
+current_day = datetime.datetime.today()
+
 # Function to draw the plot in the window
 def draw_figure(canvas, figure):
     figure_canvas_agg = FigureCanvasTkAgg(figure, canvas)
@@ -12,6 +14,17 @@ def draw_figure(canvas, figure):
     figure_canvas_agg.get_tk_widget().pack(side="top", fill="both", expand=1)
     return figure_canvas_agg
 
+# Replaces the plot with the plot for the previous or next day
+def replace_fig_agg(fig_agg, window, prev):
+    fig_agg.get_tk_widget().forget()
+    plt.close('all')
+    global current_day 
+    if prev:
+        current_day -= datetime.timedelta(days=1)
+    else:
+        current_day += datetime.timedelta(days=1)
+    fig = get_Plot(current_day.strftime("%A"))
+    return draw_figure(window["-CANVAS-"].TKCanvas, fig)
 
 
 # Layout of the application
@@ -33,21 +46,10 @@ window = sg.Window(
     font="Helvetica 18",
 )
 
-# add the pyplot to the window
-current_day = datetime.datetime.today()
+# Add the pyplot to the window
 fig = get_Plot(current_day.strftime("%A"))
 fig_agg = draw_figure(window["-CANVAS-"].TKCanvas, fig)
 
-def replace_fig_agg(fig_agg, window, prev):
-    fig_agg.get_tk_widget().forget()
-    plt.close('all')
-    global current_day 
-    if prev:
-        current_day -= datetime.timedelta(days=1)
-    else:
-        current_day += datetime.timedelta(days=1)
-    fig = get_Plot(current_day.strftime("%A"))
-    return draw_figure(window["-CANVAS-"].TKCanvas, fig)
 
 # event loop
 while True:
