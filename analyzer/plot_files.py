@@ -15,7 +15,8 @@ def get_Plot(week_day):
     hours = np.arange(10, 23)
     fig.add_subplot(111).plot(hours, daten)
     
-    # set max of y axis to 100
+    # set max of y axis to 150 and mark all above 60 as red
     fig.gca().set_ylim([0, 150])
+    fig.gca().fill_between(hours, 60, 150, color='red', alpha=0.2)
     return fig
 
