@@ -9,12 +9,13 @@ calculate_average()
 # function that returns the plot
 def get_Plot(week_day):
     fig = matplotlib.figure.Figure(figsize=(10, 5), dpi=100)
-    # fig should have the name "figure"
     fig.suptitle(week_day)
+
     daten = get_average(week_day)
-    # Fill array with numbers between 10 and 22
     hours = np.arange(10, 23)
-    print(daten)
     fig.add_subplot(111).plot(hours, daten)
+    
+    # set max of y axis to 100
+    fig.gca().set_ylim([0, 150])
     return fig
 
