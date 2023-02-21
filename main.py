@@ -1,9 +1,11 @@
+import datetime
 import PySimpleGUI as sg
 from analyzer.plot_files import *
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import matplotlib
 matplotlib.use("TkAgg")
 
+# Function to draw the plot in the window
 def draw_figure(canvas, figure):
     figure_canvas_agg = FigureCanvasTkAgg(figure, canvas)
     figure_canvas_agg.draw()
@@ -12,13 +14,14 @@ def draw_figure(canvas, figure):
 
 
 
-# Create the form and show it without the plot
+# Layout of the application
 layout = [
     [sg.Text("Auslastung")],
     [sg.Canvas(key="-CANVAS-")],
-    [sg.Button("Ok")],
+    [sg.Button("Previous")],
+    [sg.Button("Next")],
+    
 ]
-fig = get_Plot("Saturday")
 
 # window of the application
 window = sg.Window(
@@ -31,7 +34,28 @@ window = sg.Window(
 )
 
 # add the pyplot to the window
-draw_figure(window["-CANVAS-"].TKCanvas, fig)
-event, values = window.read()
-window.close()
+current_day = datetime.datetime.today()
+fig = get_Plot(current_day.strftime("%A"))
+fig_agg = draw_figure(window["-CANVAS-"].TKCanvas, fig)
 
+def replace_fig_agg(fig_agg, window, prev):
+    fig_agg.get_tk_widget().forget()
+    plt.close('all')
+    global current_day 
+    if prev:
+        current_day -= datetime.timedelta(days=1)
+    else:
+        current_day += datetime.timedelta(days=1)
+    fig = get_Plot(current_day.strftime("%A"))
+    return draw_figure(window["-CANVAS-"].TKCanvas, fig)
+
+# event loop
+while True:
+    event, values = window.read()
+    if event == sg.WIN_CLOSED:
+        break
+    elif event == 'Previous':
+            fig_agg = replace_fig_agg(fig_agg, window, True)
+    elif event == 'Next':
+            fig_agg = replace_fig_agg(fig_agg, window, False)
+window.close()
