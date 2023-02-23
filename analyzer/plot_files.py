@@ -13,6 +13,7 @@ def on_plot_hover(event, plot, fig):
             for curve in plot.get_lines():
                 if curve.contains(event)[0]:
                     fig.gca().texts[0].set_text(str(int(event.ydata)))
+                    fig.gca().texts[0].set_position((event.xdata - 0.5, event.ydata))
                     fig.canvas.draw_idle()
         except:
             pass
