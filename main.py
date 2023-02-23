@@ -50,7 +50,6 @@ window = sg.Window(
 fig = get_Plot(current_day.strftime("%A"))
 fig_agg = draw_figure(window["-CANVAS-"].TKCanvas, fig)
 
-
 # event loop
 while True:
     event, values = window.read()
