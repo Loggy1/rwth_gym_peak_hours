@@ -29,7 +29,7 @@ def get_Plot(week_day):
     plot.plot(hours, daten)
 
     # Display the x and y coords of the curve at the point that was hovered over
-    fig.gca().text(10, 60, 'Graph berühren für mehr Informationen', fontsize=12)
+    fig.gca().text(10, 140, 'Graph berühren für mehr Informationen', fontsize=12)
     fig.canvas.mpl_connect('motion_notify_event', lambda event: on_plot_hover(event, plot, fig))
 
     # set max of y axis to 150 and mark all above 60 as red
