@@ -1,7 +1,6 @@
-from PIL import Image, ImageDraw, ImageFilter
+from PIL import Image
 import pytesseract
-from datetime import datetime, date
-import pathlib
+from datetime import datetime
 from globals import *
 
 
@@ -20,7 +19,7 @@ def read_image():
     print("Visitors right now: " + str(visitors))
     changeBackgroundColor()
 
-
+# Image need to be changed in order for pytesseract to work properly
 # Change background color of image to white
 # Convertion to jpg
 def changeBackgroundColor():

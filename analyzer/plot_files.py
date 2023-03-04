@@ -1,6 +1,3 @@
-from math import trunc
-from matplotlib.artist import Artist
-import matplotlib.pyplot as plt
 from analyzer.analyze_files import *
 import matplotlib.figure
 import numpy as np

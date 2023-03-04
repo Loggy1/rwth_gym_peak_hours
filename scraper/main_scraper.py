@@ -1,11 +1,10 @@
 import http.client
-import shutil
-import pathlib
 from globals import *
 
 
 def scrape():
-    #connection headers provided by postman
+    # Get image from rwth
+    # Image only available with referer
     conn = http.client.HTTPSConnection("buchung.hsz.rwth-aachen.de")
     payload = ''
     headers = {

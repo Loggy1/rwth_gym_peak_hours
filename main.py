@@ -3,6 +3,7 @@ import PySimpleGUI as sg
 from analyzer.plot_files import *
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import matplotlib
+import matplotlib.pyplot as plt
 matplotlib.use("TkAgg")
 
 current_day = datetime.datetime.today()
