@@ -1,1 +1,1 @@
-path = "/home/user/Coding/rwth_hochschulsport_scraper"
+path = r"/home/user/Coding/rwth_hochschulsport_scraper"
