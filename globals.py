@@ -1,1 +1,3 @@
-path = r"/home/user/Coding/rwth_hochschulsport_scraper"
+import os
+path = os.path.abspath(".")
+print(path)
